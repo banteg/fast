@@ -36,7 +36,7 @@ async def get_token():
         resp = await s.get(f'https://fast.com{script}')
         text = await resp.text()
         token = re.search(r'token:"(.*?)"', text).group(1)
-    print('.', end='', flush=True)
+    dot()
     return token
 
 
@@ -45,7 +45,7 @@ async def get_urls(token):
         params = {'https': 'true', 'token': token, 'urlCount': 5}
         resp = await s.get('https://api.fast.com/netflix/speedtest', params=params)
         data = await resp.json()
-    print('.', end='', flush=True)
+    dot()
     return [x['url'] for x in data]
 
 
@@ -58,7 +58,7 @@ async def get_connection(url):
     s = ClientSession()
     sessions.append(s)
     conn = await s.get(url)
-    print('.', end='', flush=True)
+    dot()
     return conn
 
 
@@ -108,6 +108,10 @@ async def progress(future):
 async def cleanup():
     await gather(*[s.close() for s in sessions])
     print()
+
+
+def dot():
+    print('.', end='', flush=True)
 
 
 if __name__ == '__main__':
