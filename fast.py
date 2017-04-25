@@ -114,6 +114,10 @@ def dot():
     print('.', end='', flush=True)
 
 
-if __name__ == '__main__':
+def main():
     loop = get_event_loop()
-    loop.run_until_complete(run())
+    return loop.run_until_complete(run())
+
+
+if __name__ == '__main__':
+    main()
