@@ -28,7 +28,7 @@ async def run():
 
 
 async def get_token():
-    with ClientSession() as s:
+    async with ClientSession() as s:
         resp = await s.get('https://fast.com/')
         text = await resp.text()
         script = re.search(r'<script src="(.*?)">', text).group(1)
