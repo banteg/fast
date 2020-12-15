@@ -43,10 +43,10 @@ async def get_token():
 async def get_urls(token):
     async with ClientSession() as s:
         params = {'https': 'true', 'token': token, 'urlCount': 5}
-        resp = await s.get('https://api.fast.com/netflix/speedtest', params=params)
+        resp = await s.get('https://api.fast.com/netflix/speedtest/v2', params=params)
         data = await resp.json()
     dot()
-    return [x['url'] for x in data]
+    return [x['url'] for x in data['targets']]
 
 
 async def warmup(urls):
