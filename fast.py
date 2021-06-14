@@ -59,6 +59,7 @@ async def get_connection(url):
     sessions.append(s)
     conn = await s.get(url)
     dot()
+    s.close()
     return conn
 
 
