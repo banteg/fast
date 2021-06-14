@@ -55,11 +55,11 @@ async def warmup(urls):
 
 
 async def get_connection(url):
-    s = ClientSession()
-    sessions.append(s)
-    conn = await s.get(url)
-    dot()
-    return conn
+    async with ClientSession() as s:
+        sessions.append(s)
+        conn = await s.get(url)
+        dot()
+        return conn
 
 
 async def measure(conns):
